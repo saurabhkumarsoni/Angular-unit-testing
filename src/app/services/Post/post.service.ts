@@ -22,4 +22,8 @@ export class PostService {
   updatePost(post: any){
     return this.http.put(`https://jsonplaceholder.typicode.com/posts/${post.id}`, '')
   }
+
+  savePost(data: Post){
+    return this.http.post<Post[]>(`https://jsonplaceholder.typicode.com/posts`,data)
+  }
 }

@@ -9,13 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { PostComponent } from './components/post/post.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
 import { FormsModule } from '@angular/forms';
+import { StudentComponent } from './components/student/student.component';
+import { StudentService } from './services/Student/student.service';
 @NgModule({
   declarations: [
     AppComponent,
     StrengthPipe,
     PostsComponent,
     PostComponent,
-    PostDetailComponent
+    PostDetailComponent,
+    StudentComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [StudentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

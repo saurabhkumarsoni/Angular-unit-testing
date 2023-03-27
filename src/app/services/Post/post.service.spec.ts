@@ -24,7 +24,7 @@ describe('PostService', ()=>{
     }
 ];
     beforeEach(()=>{
-        let httpClientSpyObj =jasmine.createSpyObj('HttpClient', ['get']);
+        let httpClientSpyObj =jasmine.createSpyObj('HttpClient', ['get', 'delete', 'put', 'post']);
         TestBed.configureTestingModule({
             providers: [PostService, {
                 provide: HttpClient,
@@ -48,8 +48,37 @@ describe('PostService', ()=>{
         expect(httpClientSpy.get).toHaveBeenCalledTimes(1)
         });
 
-        
+        it('should return expected posts when deletePost is called', ()=>{
+            httpClientSpy.delete.and.returnValue(of(POST));
+        postService.deletePost(POST[0]).subscribe({
+            next: (posts) =>{
+                expect(posts).toEqual(POST);
+            },
+            error: () =>{}
+        });
+        expect(httpClientSpy.delete).toHaveBeenCalledTimes(1)
+        });
 
-        
+        it('should return expected posts when updatePost is called', ()=>{
+            httpClientSpy.put.and.returnValue(of(POST));
+        postService.updatePost(POST[0]).subscribe({
+            next: (posts) =>{
+                expect(posts).toEqual(POST);
+            },
+            error: () =>{}
+        });
+        expect(httpClientSpy.put).toHaveBeenCalledTimes(1)
+        });
+
+        it('should return expected posts when post is called', ()=>{
+            httpClientSpy.post.and.returnValue(of(POST));
+        postService.savePost(POST[0]).subscribe({
+            next: (posts) =>{
+                expect(posts).toEqual(POST);
+            },
+            error: () =>{}
+        });
+        expect(httpClientSpy.post).toHaveBeenCalledTimes(1)
+        });
     })
 })
